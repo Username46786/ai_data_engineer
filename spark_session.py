@@ -16,9 +16,24 @@ def _spark_temp_dir() -> str:
     return os.getenv("SPARK_LOCAL_DIR", "/tmp/spark-temp")
 
 
+def _is_spark_session_valid(spark: SparkSession | None) -> bool:
+    if spark is None:
+        return False
+    try:
+        return spark.sparkContext._jsc is not None and not spark.sparkContext._jsc.sc().isStopped()
+    except Exception:
+        return False
+
+
+def _ensure_active_dataframe_session(spark_df: DataFrame) -> None:
+    if not _is_spark_session_valid(spark_df.sparkSession):
+        raise RuntimeError("The Spark session is not active. Reload the dataset to create a fresh Spark DataFrame.")
+
+
 def get_spark_session() -> SparkSession:
     global _SPARK_SESSION
-    if _SPARK_SESSION is None:
+    if not _is_spark_session_valid(_SPARK_SESSION):
+        _SPARK_SESSION = None
         temp_dir = _spark_temp_dir()
         os.makedirs(temp_dir, exist_ok=True)
         _SPARK_SESSION = (
@@ -41,13 +56,6 @@ def get_spark_session() -> SparkSession:
         )
         _SPARK_SESSION.sparkContext.setLogLevel("ERROR")
     return _SPARK_SESSION
-
-
-def stop_spark() -> None:
-    global _SPARK_SESSION
-    if _SPARK_SESSION is not None:
-        _SPARK_SESSION.stop()
-        _SPARK_SESSION = None
 
 
 def _materialize_upload(uploaded_file: Any) -> tuple[str, str]:
@@ -79,6 +87,7 @@ def load_csv_to_spark(file_source: Any) -> tuple[DataFrame, dict[str, Any]]:
 
 
 def preview_dataset(spark_df: DataFrame, limit: int = 10) -> dict[str, Any]:
+    _ensure_active_dataframe_session(spark_df)
     return {
         "preview_df": spark_df.limit(limit).toPandas(),
         "schema_df": pd.DataFrame(

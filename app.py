@@ -7,7 +7,7 @@ import streamlit as st
 
 from executor import QueryExecutionError, execute_query
 from nl_to_intent import SUPPORTED_INTENTS, build_example_questions
-from spark_session import load_csv_to_spark, stop_spark
+from spark_session import load_csv_to_spark
 from visualizer import render_chart
 
 
@@ -176,7 +176,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    finally:
-        stop_spark()
+    main()
