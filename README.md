@@ -79,6 +79,18 @@ Deploy this repo as a Render Python Web Service.
 Render note:
 
 - Add a repo-root `.python-version` file with `3.11.11` so Render uses Python 3.11 instead of its newer default, which can break `pyarrow` installs.
+- If PySpark fails on Render with `JAVA_GATEWAY_EXITED`, deploy with Docker so Java is installed in the runtime image.
+
+## Docker Deployment
+
+For Render, you can deploy this repo as a Docker web service instead of a plain Python service.
+
+- Render will build from the repo `Dockerfile`
+- The image uses Python 3.11 and installs OpenJDK 17
+- The container starts with:
+  `streamlit run app.py --server.port=$PORT --server.address=0.0.0.0`
+
+This keeps the existing app architecture unchanged while ensuring PySpark has a working JVM at runtime.
 
 Recommended environment variables:
 
