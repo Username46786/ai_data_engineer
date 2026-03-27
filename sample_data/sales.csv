@@ -1,0 +1,21 @@
+order_id,order_date,region,state,category,customer_id,sales,quantity,order_value
+1001,2025-01-05,West,California,Coffee,C001,4200,14,300
+1002,2025-01-08,East,New York,Tea,C002,1800,9,200
+1003,2025-01-15,South,Texas,Snacks,C003,2100,15,140
+1004,2025-01-22,West,Washington,Coffee,C004,3900,13,300
+1005,2025-02-03,Midwest,Illinois,Bakery,C005,2500,10,250
+1006,2025-02-10,East,Florida,Tea,C006,2750,11,250
+1007,2025-02-17,South,Georgia,Snacks,C007,1600,8,200
+1008,2025-02-24,West,California,Bakery,C008,3300,12,275
+1009,2025-03-02,Midwest,Ohio,Coffee,C009,2900,10,290
+1010,2025-03-09,East,New Jersey,Tea,C010,3100,13,238
+1011,2025-03-16,South,Texas,Bakery,C011,2400,9,267
+1012,2025-03-23,West,Oregon,Snacks,C012,3550,14,254
+1013,2025-04-01,Midwest,Michigan,Coffee,C013,4100,16,256
+1014,2025-04-08,East,Virginia,Bakery,C014,2300,10,230
+1015,2025-04-15,South,Florida,Coffee,C015,2800,11,255
+1016,2025-04-22,West,Nevada,Tea,C016,3000,12,250
+1017,2025-05-05,Midwest,Illinois,Snacks,C017,2200,9,244
+1018,2025-05-12,East,New York,Coffee,C018,4700,17,276
+1019,2025-05-19,South,Georgia,Tea,C019,1950,8,244
+1020,2025-05-26,West,California,Bakery,C020,3650,15,243

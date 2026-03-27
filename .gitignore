@@ -1,0 +1,6 @@
+.python_packages/
+.tmp/
+.venv/
+.venv-tmp/
+__pycache__/
+*.pyc
