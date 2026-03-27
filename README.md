@@ -73,8 +73,12 @@ Deploy this repo as a Render Python Web Service.
 
 - Build command: `pip install -r requirements.txt`
 - Start command: `streamlit run app.py --server.port=$PORT --server.address=0.0.0.0`
-- Python version: use Python 3.10 or 3.11
+- Python version: use Python 3.11
 - Environment: make sure Java 11+ is available because PySpark needs a JVM
+
+Render note:
+
+- Add a repo-root `.python-version` file with `3.11.11` so Render uses Python 3.11 instead of its newer default, which can break `pyarrow` installs.
 
 Recommended environment variables:
 
